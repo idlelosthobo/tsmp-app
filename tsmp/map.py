@@ -4,7 +4,7 @@ from tsmp.settings import MAXIMUM_NODE_COUNT
 
 class Map:
 
-    def __init__(self, node_count=4):
+    def __init__(self, node_count=6):
         if node_count > MAXIMUM_NODE_COUNT:
             self.node_count = MAXIMUM_NODE_COUNT
         elif node_count <= 1:
@@ -16,4 +16,9 @@ class Map:
             self.node_list[i] = Node()
 
     def get_distance_from_path(self, path):
-        for i in range(len(path)):
+        distance = 0.0
+        for i in range(self.node_count):
+            if i < self.node_count - 1:
+                distance += self.node_list[path.node_order_list[i]].get_distance_to_node(self.node_list[path.node_order_list[i+1]])
+                pass
+        return distance

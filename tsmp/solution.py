@@ -12,5 +12,28 @@ class Solution:
         self.best_path_list = list()
         self.path_list = list()
 
+    def set_longest(self, path, distance):
+        self.longest_path = path
+        self.longest_distance = distance
+
+    def set_shortest(self, path, distance):
+        self.shortest_path = path
+        self.shortest_distance = distance
+
     def run(self):
-        print(len(self.path_list))
+        for path in self.path_list:
+            distance = self.map.get_distance_from_path(path)
+            if self.longest_distance is None:
+                self.set_longest(path, distance)
+            else:
+                if self.longest_distance < distance:
+                    self.set_longest(path, distance)
+
+            if self.shortest_path is None:
+                self.set_shortest(path, distance)
+            else:
+                if self.shortest_distance > distance:
+                    self.set_shortest(path, distance)
+
+        print('Shortest Distance: ' + str(self.shortest_distance))
+        print('Longest Distance: ' + str(self.longest_distance))
