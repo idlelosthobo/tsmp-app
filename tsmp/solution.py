@@ -35,5 +35,5 @@ class Solution:
                 if self.shortest_distance > distance:
                     self.set_shortest(path, distance)
 
-        print('Shortest Distance: ' + str(self.shortest_distance))
-        print('Longest Distance: ' + str(self.longest_distance))
+        # print('Shortest Distance: ' + str(self.shortest_distance))
+        # print('Longest Distance: ' + str(self.longest_distance))

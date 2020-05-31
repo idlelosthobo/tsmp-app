@@ -1,10 +1,12 @@
 from tsmp.node import Node
-from tsmp.settings import MAXIMUM_NODE_COUNT
+from tsmp.settings import MAXIMUM_NODE_COUNT, MAP_SIZE_Y, MAP_SIZE_X
 
 
 class Map:
 
     def __init__(self, node_count=6):
+        self.size_x = MAP_SIZE_X
+        self.size_y = MAP_SIZE_Y
         if node_count > MAXIMUM_NODE_COUNT:
             self.node_count = MAXIMUM_NODE_COUNT
         elif node_count <= 1:

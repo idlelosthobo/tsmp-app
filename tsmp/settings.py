@@ -1,4 +1,5 @@
-MAP_SIZE = 1000
+MAP_SIZE_X = 1280
+MAP_SIZE_Y = 720
 
 #Anything more than 9 nodes can maim a cpu
 MAXIMUM_NODE_COUNT = 9
