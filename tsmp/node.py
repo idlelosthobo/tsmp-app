@@ -19,3 +19,6 @@ class Node:
     def get_distance_to_node(self, node):
         distance = sqrt((self.x - node.x) ** 2 + (self.y - node.y) ** 2)
         return distance
+
+    def get_angle_to_node(self, node):
+        pass

@@ -11,6 +11,8 @@ class Solution:
         self.shortest_distance = 0.0
         self.best_path_list = list()
         self.path_list = list()
+        self.path_count = 0
+        self.information = dict()
 
     def set_longest(self, path, distance):
         self.longest_path = path
@@ -21,6 +23,7 @@ class Solution:
         self.shortest_distance = distance
 
     def run(self):
+        self.path_count = len(self.path_list)
         for path in self.path_list:
             distance = self.map.get_distance_from_path(path)
             if self.longest_distance is None:
@@ -34,6 +37,9 @@ class Solution:
             else:
                 if self.shortest_distance > distance:
                     self.set_shortest(path, distance)
+
+    def add_information(self, type, value):
+        self.information[type] = value
 
         # print('Shortest Distance: ' + str(self.shortest_distance))
         # print('Longest Distance: ' + str(self.longest_distance))
