@@ -5,7 +5,7 @@ from solution.solve import Solve
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg)
 from matplotlib.figure import Figure
-from tsmp.settings import MAXIMUM_NODE_COUNT
+from tsmp.settings import MAXIMUM_ACCURATE_NODE_COUNT
 
 class Application(tk.Frame):
 
@@ -37,7 +37,7 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.label_node_count = tk.Label(self, text='Node Count ('+str(MAXIMUM_NODE_COUNT)+' Maximum)').grid(row=0, column=0, pady=5, padx=5, sticky='e')
+        self.label_node_count = tk.Label(self, text='Node Count ('+str(MAXIMUM_ACCURATE_NODE_COUNT)+' Maximum for Accurate Solve)').grid(row=0, column=0, pady=5, padx=5, sticky='e')
         self.entry_node_count = tk.Entry(self, textvariable=self.node_count).grid(row=0, column=1, pady=5, sticky='w')
         self.button_generate_map = tk.Button(self, text='Generate Map', command=self.generate_map).grid(row=0, column=2, pady=5)
         self.option_solution_select = tk.OptionMenu(self, self.solution_selected, 'Basic', 'Random', 'Weighted Angle').grid(row=0, column=3, pady=5)
@@ -110,6 +110,8 @@ class Application(tk.Frame):
             self.tree_map_information.insert('', 'end', values=('Solve Paths', solve.path_count))
             self.tree_path_information.insert('', 'end', values=('Solve', 'Shortest Path', str(solve.shortest_distance), str(solve.shortest_path)))
             self.tree_path_information.insert('', 'end', values=('Solve', 'Longest Path', str(solve.longest_distance), str(solve.longest_path)))
+            for key, val in solve.information.items():
+                self.tree_solution_information.insert('', 'end', values=(key, val))
 
     def clear_tree(self, tree):
         for i in tree.get_children():
