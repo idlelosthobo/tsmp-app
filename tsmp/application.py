@@ -32,6 +32,7 @@ class Application(tk.Frame):
         self.notebook_visual.add(self.tab_longest_visual, text='Longest Path')
         self.grid()
         self.node_count = tk.IntVar(self, 6)
+        self.solution_start_node = tk.IntVar(self, 0)
         self.solution_selected = tk.StringVar(self, 'Basic')
         self.map = None
         self.create_widgets()
@@ -41,8 +42,10 @@ class Application(tk.Frame):
         self.entry_node_count = tk.Entry(self, textvariable=self.node_count).grid(row=0, column=1, pady=5, sticky='w')
         self.button_generate_map = tk.Button(self, text='Generate Map', command=self.generate_map).grid(row=0, column=2, pady=5)
         self.option_solution_select = tk.OptionMenu(self, self.solution_selected, 'Basic', 'Random', 'Weighted Angle').grid(row=0, column=3, pady=5)
-        self.button_run_solution = tk.Button(self, text='Run Solution', command=self.run_solution).grid(row=0, column=4, pady=5)
-        self.button_solve_map = tk.Button(self, text='Solve Map', command=self.solve_map).grid(row=0, column=5, pady=5)
+        self.label_solution_start_node = tk.Label(self, text='Solution Start Node').grid(row=0, column=4, pady=5, padx=5, sticky='e')
+        self.entry_solution_start_node = tk.Entry(self, textvariable=self.solution_start_node).grid(row=0, column=5, pady=5, sticky='w')
+        self.button_run_solution = tk.Button(self, text='Run Solution', command=self.run_solution).grid(row=0, column=6, pady=5)
+        self.button_solve_map = tk.Button(self, text='Solve Map', command=self.solve_map).grid(row=0, column=7, pady=6)
 
         TREE_MAP_INFORMATION_COLUMNS = ('Type', 'Value')
         self.tree_map_information = ttk.Treeview(self.tab_map, height=20, columns=TREE_MAP_INFORMATION_COLUMNS, show='headings')
@@ -88,7 +91,7 @@ class Application(tk.Frame):
 
         self.label_node_count = tk.Label(self, text='Information').grid(row=1, column=0, columnspan=4, pady=5, padx=5)
         self.notebook_information.grid(row=2, column=0, columnspan=4, padx=10, sticky='nwse')
-        self.label_node_count = tk.Label(self, text='Visual').grid(row=1, column=4, columnspan=2, pady=5, padx=5)
+        self.label_node_count = tk.Label(self, text='Visual').grid(row=1, column=4, columnspan=4, pady=5, padx=5)
         self.notebook_visual.grid(row=2, column=4, columnspan=4, padx=10, sticky='nwse')
 
     def generate_map(self):
@@ -140,6 +143,8 @@ class Application(tk.Frame):
         if line:
             fig.add_subplot(111).plot(x, y, 'C3', lw=3, alpha=0.5)
         fig.add_subplot().scatter(x, y, s=120)
+        for i in range(self.map.node_count):
+            fig.add_subplot().text(x[i], y[i]+18, str(i), color="black", fontsize=12, horizontalalignment='center')
 
         self.canvas = FigureCanvasTkAgg(fig, master=tab)  # A tk.DrawingArea.
         self.canvas.draw()

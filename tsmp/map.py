@@ -22,3 +22,7 @@ class Map:
                 distance += self.node_list[path.node_order_list[i]].get_distance_to_node(self.node_list[path.node_order_list[i+1]])
                 pass
         return distance
+
+    def reset_node_weight(self):
+        for i in range(self.node_count):
+            self.node_list[i].weight = 0.0

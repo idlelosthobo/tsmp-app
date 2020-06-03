@@ -15,6 +15,7 @@ class Node:
             self.y = y
         else:
             self.y = randint(0, MAP_SIZE_Y)
+        self.weight = 0.0
 
     def get_distance_to_node(self, node):
         distance = sqrt((self.x - node.x) ** 2 + (self.y - node.y) ** 2)
@@ -22,3 +23,4 @@ class Node:
 
     def get_angle_to_node(self, node):
         pass
+
