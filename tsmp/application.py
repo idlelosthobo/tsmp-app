@@ -7,6 +7,7 @@ from matplotlib.backends.backend_tkagg import (
 from matplotlib.figure import Figure
 from tsmp.settings import MAXIMUM_ACCURATE_NODE_COUNT
 
+
 class Application(tk.Frame):
 
     def __init__(self, master=None):
@@ -108,6 +109,7 @@ class Application(tk.Frame):
         if self.map:
             solve = Solve(self.map)
             solve.run()
+            print(solve.shortest_path)
             self.draw_path(solve.shortest_path, self.tab_shortest_visual)
             self.draw_path(solve.longest_path, self.tab_longest_visual)
             self.tree_map_information.insert('', 'end', values=('Solve Paths', solve.path_count))
@@ -136,15 +138,20 @@ class Application(tk.Frame):
             x.append(self.map.node_list[node_number].x)
             y.append(self.map.node_list[node_number].y)
 
-        self.draw_visual(x, y, tab, True)
+        self.draw_visual(x, y, tab, path, True)
 
-    def draw_visual(self, x, y, tab, line=False):
+    def draw_visual(self, x, y, tab, path=None, line=False):
         fig = Figure(figsize=(6, 4), dpi=100)
         if line:
             fig.add_subplot(111).plot(x, y, 'C3', lw=3, alpha=0.5)
         fig.add_subplot().scatter(x, y, s=120)
         for i in range(self.map.node_count):
-            fig.add_subplot().text(x[i], y[i]+18, str(i), color="black", fontsize=12, horizontalalignment='center')
+            number = 0
+            if path:
+                number = path.node_order_list[i]
+            else:
+                number = i
+            fig.add_subplot().text(x[i], y[i]+18, str(number), color="black", fontsize=12, horizontalalignment='center')
 
         self.canvas = FigureCanvasTkAgg(fig, master=tab)  # A tk.DrawingArea.
         self.canvas.draw()
