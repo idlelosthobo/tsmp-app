@@ -7,6 +7,7 @@ from matplotlib.backends.backend_tkagg import (
 from matplotlib.figure import Figure
 from tsmp.settings import MAXIMUM_ACCURATE_NODE_COUNT
 
+
 class Application(tk.Frame):
 
     def __init__(self, master=None):
@@ -144,7 +145,7 @@ class Application(tk.Frame):
             fig.add_subplot(111).plot(x, y, 'C3', lw=3, alpha=0.5)
         fig.add_subplot().scatter(x, y, s=120)
         for i in range(self.map.node_count):
-            fig.add_subplot().text(x[i], y[i]+18, str(i), color="black", fontsize=12, horizontalalignment='center')
+            fig.add_subplot().text(self.map.node_list[i].x, self.map.node_list[i].y+18, str(i), color="black", fontsize=12, horizontalalignment='center')
 
         self.canvas = FigureCanvasTkAgg(fig, master=tab)  # A tk.DrawingArea.
         self.canvas.draw()
@@ -168,7 +169,7 @@ class Application(tk.Frame):
                 self.insert_solution_information(basic)
             elif self.solution_selected.get() == 'Weighted Angle':
                 from solution.weighted_angle import WeightedAngle
-                weighted_angle = WeightedAngle(self.map)
+                weighted_angle = WeightedAngle(self.map, self.solution_start_node.get())
                 weighted_angle.run()
                 self.draw_path(weighted_angle.shortest_path, self.tab_solution_visual)
                 self.tree_path_information.insert('', 'end', values=('Weighted_angle', 'Shortest Path', str(weighted_angle.shortest_distance), str(weighted_angle.shortest_path)))
