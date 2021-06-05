@@ -4,6 +4,7 @@ from itertools import permutations
 from tsmp.settings import MAXIMUM_ACCURATE_NODE_COUNT, INACCURATE_SOLVE_ITTERATIONS
 from random import shuffle
 
+
 class Solve(Solution):
 
     def __init__(self, map):

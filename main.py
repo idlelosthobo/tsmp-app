@@ -1,26 +1,18 @@
-# Filename: g_layout.py
+import tkinter
+from tsmp.application import Application
+from tsmp.settings import WINDOW_SIZE_X, WINDOW_SIZE_Y
 
-"""Grid layout example."""
 
-import sys
+root = tkinter.Tk()
 
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import QGridLayout
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtWidgets import QWidget
+root.minsize(WINDOW_SIZE_X, WINDOW_SIZE_Y)
+root.title('Traveling Salesman Problem Tool')
 
-app = QApplication(sys.argv)
-window = QWidget()
-window.setWindowTitle('QGridLayout')
-layout = QGridLayout()
-layout.addWidget(QPushButton('Button (0, 0)'), 0, 0)
-layout.addWidget(QPushButton('Button (0, 1)'), 0, 1)
-layout.addWidget(QPushButton('Button (0, 2)'), 0, 2)
-layout.addWidget(QPushButton('Button (1, 0)'), 1, 0)
-layout.addWidget(QPushButton('Button (1, 1)'), 1, 1)
-layout.addWidget(QPushButton('Button (1, 2)'), 1, 2)
-layout.addWidget(QPushButton('Button (2, 0)'), 2, 0)
-layout.addWidget(QPushButton('Button (2, 1) + 2 Columns Span'), 2, 1, 1, 2)
-window.setLayout(layout)
-window.show()
-sys.exit(app.exec_())
+for row_index in range(3):
+    root.grid_rowconfigure(row_index, weight=1)
+    for column_index in range(8):
+        root.grid_columnconfigure(column_index, weight=1)
+
+app = Application(master=root)
+app.generate_map()
+app.mainloop()

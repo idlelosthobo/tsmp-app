@@ -6,7 +6,8 @@ import numpy as np
 
 class Node:
 
-    def __init__(self, x=None, y=None):
+    def __init__(self, id, x=None, y=None):
+        self.id = id
         if x:
             self.x = x
         else:

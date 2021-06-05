@@ -11,9 +11,9 @@ class Map:
             self.node_count = 2
         else:
             self.node_count = node_count
-        self.node_list = dict()
+        self.node_list = list()
         for i in range(self.node_count):
-            self.node_list[i] = Node()
+            self.node_list.append(Node(id=i))
 
     def get_distance_from_path(self, path):
         distance = 0.0

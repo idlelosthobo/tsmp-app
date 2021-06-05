@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tsmp.map import Map
-from solution.solve import Solve
+from solution.solve_solution import Solve
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg)
 from matplotlib.figure import Figure
@@ -101,8 +101,8 @@ class Application(tk.Frame):
         self.clear_tree(self.tree_path_information)
         self.map = Map(self.node_count.get())
         self.draw_map()
-        for key, value in self.map.node_list.items():
-            self.tree_node_information.insert('', 'end', values=(key, value.x, value.y))
+        for node in self.map.node_list:
+            self.tree_node_information.insert('', 'end', values=(node.id, node.x, node.y))
         self.tree_map_information.insert('', 'end', values=('Node Count', self.map.node_count))
 
     def solve_map(self):
@@ -124,9 +124,9 @@ class Application(tk.Frame):
     def draw_map(self):
         x = list()
         y = list()
-        for key, value in self.map.node_list.items():
-            x.append(value.x)
-            y.append(value.y)
+        for node in self.map.node_list:
+            x.append(node.x)
+            y.append(node.y)
 
         self.draw_visual(x, y, self.tab_map_visual)
 
@@ -154,21 +154,21 @@ class Application(tk.Frame):
     def run_solution(self):
         if self.map:
             if self.solution_selected.get() == 'Random':
-                from solution.random import Random
+                from solution.random_solution import Random
                 random = Random(self.map)
                 random.run()
                 self.draw_path(random.shortest_path, self.tab_solution_visual)
                 self.tree_path_information.insert('', 'end', values=('Random', 'Shortest Path', str(random.shortest_distance), str(random.shortest_path)))
                 self.insert_solution_information(random)
             elif self.solution_selected.get() == 'Basic':
-                from solution.basic import Basic
+                from solution.basic_solution import Basic
                 basic = Basic(self.map)
                 basic.run()
                 self.draw_path(basic.shortest_path, self.tab_solution_visual)
                 self.tree_path_information.insert('', 'end', values=('Basic', 'Shortest Path', str(basic.shortest_distance), str(basic.shortest_path)))
                 self.insert_solution_information(basic)
             elif self.solution_selected.get() == 'Weighted Angle':
-                from solution.weighted_angle import WeightedAngle
+                from solution.weighted_angle_solution import WeightedAngle
                 weighted_angle = WeightedAngle(self.map, self.solution_start_node.get())
                 weighted_angle.run()
                 self.draw_path(weighted_angle.shortest_path, self.tab_solution_visual)
