@@ -1,7 +1,6 @@
 import tkinter
-from tsmp.application import Application
+from tsmp.application_tk import Application
 from tsmp.settings import WINDOW_SIZE_X, WINDOW_SIZE_Y
-
 
 root = tkinter.Tk()
 
@@ -16,3 +15,5 @@ for row_index in range(3):
 app = Application(master=root)
 app.generate_map()
 app.mainloop()
+
+
