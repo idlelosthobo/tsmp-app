@@ -1,6 +1,5 @@
-from tsmp.solution import Solution
+from tsmp.solutions.solution import Solution
 from tsmp.path import Path
-from itertools import permutations
 
 
 class Basic(Solution):

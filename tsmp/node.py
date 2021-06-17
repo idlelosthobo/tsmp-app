@@ -1,7 +1,6 @@
 from random import randint
 from tsmp.settings import MAP_SIZE_X, MAP_SIZE_Y
 from math import sqrt
-import numpy as np
 
 
 class Node:
@@ -24,9 +23,9 @@ class Node:
         distance = sqrt((self.x - node.x) ** 2 + (self.y - node.y) ** 2)
         return distance
 
-    def get_angle_to_node(self, node):
-        p1 = (self.x, self.y)
-        p2 = (node.x, node.y)
-        ang1 = np.arctan2(*p1[::-1])
-        ang2 = np.arctan2(*p2[::-1])
-        return np.rad2deg((ang1 - ang2) % (2 * np.pi))
+    # def get_angle_to_node(self, node):
+    #     p1 = (self.x, self.y)
+    #     p2 = (node.x, node.y)
+    #     ang1 = np.arctan2(*p1[::-1])
+    #     ang2 = np.arctan2(*p2[::-1])
+    #     return np.rad2deg((ang1 - ang2) % (2 * np.pi))

@@ -1,8 +1,7 @@
 # a solution that checks angle change, path length and determines best route
 
-from tsmp.solution import Solution
+from tsmp.solutions.solution import Solution
 from tsmp.path import Path
-from itertools import permutations
 
 
 class WeightedAngle(Solution):

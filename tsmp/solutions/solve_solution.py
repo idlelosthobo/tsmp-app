@@ -1,4 +1,4 @@
-from tsmp.solution import Solution
+from tsmp.solutions.solution import Solution
 from tsmp.path import Path
 from itertools import permutations
 from tsmp.settings import MAXIMUM_ACCURATE_NODE_COUNT, INACCURATE_SOLVE_ITTERATIONS
